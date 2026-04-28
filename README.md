@@ -17,22 +17,29 @@ If you are developing a production application, we recommend using TypeScript wi
 # EY-DE-AIE-Agent-Catalog
 
 # HOW to Build and deploy to Azure
-🚀 Azure Web App Deployment Guide (Static Build with Express)
-This guide walks through building, packaging, and deploying your app to Azure Web App.
+# Azure Web App Deployment Guide
 
-📦 Step 1: Build the Project
-Run the build command:
+This guide explains how to build the project, prepare the `dist` folder for deployment, create a ZIP package, and deploy it to Azure Web App.
 
+## Step 1: Build the project
+
+Run the following command to generate the production build:
+
+```bash
 npm run build
-This will generate the dist/ folder.
+```
 
-🖥️ Step 2: Add Server Files inside dist/
-Create the following files inside the dist/ folder:
+---
 
-📄 server.js
+## Step 2: Create `server.js` and `package.json` inside the `dist` folder
+
+After the build is complete, create the following files under the `dist` folder.
+
+### `server.js`
+
+```js
 const express = require('express');
 const path = require('path');
-
 const app = express();
 
 app.use(express.static(__dirname));
@@ -42,11 +49,14 @@ app.get('*', (req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
 });
-📄 package.json
+```
+
+### `package.json`
+
+```json
 {
   "name": "skill-sync-static",
   "version": "1.0.0",
@@ -58,9 +68,15 @@ app.listen(port, () => {
     "start": "node server.js"
   }
 }
-🗜️ Step 3: Create Deployment ZIP
-Use the following Python script to zip the dist/ folder:
+```
 
+---
+
+## Step 3: Zip the `dist` folder
+
+Use the following Python script to create a deployment ZIP file from the `dist` folder:
+
+```python
 import zipfile
 import os
 
@@ -71,28 +87,50 @@ if os.path.exists(zip_path):
     os.remove(zip_path)
 
 z = zipfile.ZipFile(zip_path, 'w')
-
 for root, _, files in os.walk(dist_dir):
     for f in files:
         full_path = os.path.join(root, f)
         arcname = os.path.relpath(full_path, dist_dir).replace('\\', '/')
         z.write(full_path, arcname)
-
 z.close()
 
 print("Created zip with", z.namelist())
-🔐 Step 4: Login to Azure
+```
+
+---
+
+## Step 4: Log in to Azure
+
+Run the following command to log in using device code:
+
+```bash
 az login --use-device-code
-☁️ Step 5: Deploy to Azure Web App
+```
+
+---
+
+## Step 5: Deploy the ZIP file to Azure Web App
+
+Run the following command to deploy the ZIP package:
+
+```bash
 az webapp deploy \
   --name EY-DE-AIE-Agent-Catalog \
   --resource-group AIE_SSDL_MVP \
   --src-path "C:\Users\MQ955SE\OneDrive - EY\Desktop\Download\Download\ey-da-agents\dist\azure-deploy.zip" \
   --clean true
-✅ Notes
-Ensure dist/ contains:
-index.html
-server.js
-package.json
-Azure will run the app using the start script.
-The Express server ensures SPA routing works correctly.
+```
+
+---
+
+## Notes
+
+- Make sure the `dist` folder contains:
+  - `index.html`
+  - `server.js`
+  - `package.json`
+  - all generated static assets
+- The ZIP file should contain the contents of `dist`, not the `dist` folder itself as the root folder.
+- Azure will use the `start` script from `package.json` to run the app.
+
+``
