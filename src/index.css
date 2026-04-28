@@ -1,0 +1,155 @@
+:root {
+  --bg: #0b0b0b;
+  --nav: #111111;
+  --text: #101828;
+  --muted: #475467;
+  --border: #e5e7eb;
+  --card: #ffffff;
+  --brand: #f7b500;   /* EY-ish accent */
+  --accent: #1463ff;
+  --chip: #f4f4f5;
+  --chip-text: #3f3f46;
+  --tab-bg: #f8fafc;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: var(--text);
+  background: #fafafa;
+}
+
+.app-shell { min-height: 100%; display: flex; flex-direction: column; }
+.container { width: min(1200px, 94%); margin: 24px auto 80px; }
+
+.header {
+  background: var(--nav);
+  color: #fff;
+  padding: 12px 0;
+  border-bottom: 1px solid #222;
+}
+.header-inner {
+  width: min(1200px, 94%); margin: 0 auto; display: flex; align-items: center; gap: 24px;
+}
+.brand { font-weight: 800; letter-spacing: 0.3px; color: var(--brand); }
+.nav { margin-left: auto; display: flex; gap: 18px; opacity: .9; }
+
+.page-title { font-size: 28px; font-weight: 700; margin: 8px 0 6px; }
+.page-sub { color: var(--muted); margin-bottom: 18px; }
+
+.row { display: flex; gap: 16px; flex-wrap: wrap; }
+
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+  box-shadow: 0 1px 1px rgba(0,0,0,.03);
+}
+.card-body { padding: 14px 16px 18px; }
+.card h3 { margin: 0 0 6px; font-size: 16px; }
+.card p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+.agent-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px;
+}
+.thumb { width: 100%; height: 150px; object-fit: cover; background: #eaeaea; display:block; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; cursor: pointer;
+  padding: 8px 12px; border-radius: 10px; border: 1px solid var(--border); background: #fff;
+  font-weight: 600; color: #111; text-decoration: none;
+}
+.btn.ghost { background: transparent; }
+.btn.primary { background: #111827; color: #fff; border-color: #111827; }
+.btn.small { padding: 6px 10px; font-size: 13px; }
+
+.kbd { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; font-size: 12px; background: #0f172a; color: #fff; padding: 2px 6px; border-radius: 6px; }
+
+.searchbar {
+  display: grid; grid-template-columns: 150px 1fr; gap: 10px; align-items: center;
+  background: #fff; padding: 10px; border: 1px solid var(--border); border-radius: 12px;
+}
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip {
+  background: var(--chip); color: var(--chip-text); border-radius: 999px; padding: 6px 10px; font-size: 12px;
+  border: 1px solid #e9e9ee; cursor: pointer; user-select: none;
+}
+.chip.active { background: #111827; color: #fff; border-color: #111827; }
+
+.breadcrumb { display: inline-flex; gap: 8px; align-items: center; color: var(--muted); font-size: 13px; }
+.breadcrumb a { color: inherit; text-decoration: none; }
+.badge { display: inline-block; padding: 4px 8px; font-size: 11px; background: #eef2ff; color: #3730a3; border-radius: 8px; border: 1px solid #e0e7ff; }
+
+.section { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; }
+.section + .section { margin-top: 14px; }
+.section h4 { margin: 0 0 8px; }
+
+.tabs {
+  background: var(--tab-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.tablist { display: flex; gap: 4px; padding: 6px; border-bottom: 1px solid var(--border); background: #fff; }
+.tab {
+  appearance: none; background: transparent; border: 0; padding: 10px 14px; border-radius: 10px; cursor: pointer;
+  font-weight: 600; color: #374151;
+}
+.tab[aria-selected="true"] { background: #111827; color: #fff; }
+.tabpanel { padding: 16px; }
+
+.metrics { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 12px; }
+.metric { border: 1px dashed #e5e7eb; border-radius: 12px; padding: 12px; background: #fff; }
+.metric .label { color: var(--muted); font-size: 12px; }
+.metric .value { font-weight: 800; margin-top: 6px; }
+
+.grid-two { display: grid; grid-template-columns: 1fr; gap: 12px; }
+@media (min-width: 860px) { .grid-two { grid-template-columns: 1fr 1fr; } }
+
+.mono { font-family: ui-monospace, Menlo, Consolas, monospace; }
+
+.upload {
+  border: 2px dashed #d1d5db; border-radius: 12px; padding: 16px; text-align: center; background: #fff;
+}
+.result { background: #0b1020; color: #e5e7eb; border-radius: 10px; padding: 12px; font-size: 13px; }
+.footer-actions { display: flex; gap: 8px; align-items: center; margin-top: 16px; }
+/* --- video embed --- */
+.video-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  background: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+.video-container iframe {
+  position: absolute; inset: 0; width: 100%; height: 100%; border: 0;
+}
+.video-empty { position: absolute; inset: 0; display: grid; place-items: center; color: #94a3b8; }
+.video-empty-inner { padding: 16px; font-size: 14px; text-align: center; }
+.input-row { display: flex; gap: 8px; align-items: center; }
+.input-row input[type="url"] { flex: 1; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--border); }
+.toggle { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
+
+/* Keep the SharePoint video at a sensible size */
+.section.video-only .video-container {
+  /* pick your preferred cap */
+  max-width: 720px;          /* 640–960px also works well */
+  max-height: 405px;         /* 16:9 of 720px width */
+  margin: 0 auto;            /* center within the column */
+}
+
+/* Use modern aspect-ratio so the frame never gets tall */
+.section.video-only .video-container {
+  aspect-ratio: 16 / 9;
+  height: auto;              /* height follows width & ratio */
+}
+
+/* Make the <iframe>/<video> fill the box without overspill */
+.section.video-only .video-container iframe,
+.section.video-only .video-container video {
+  position: static;          /* no absolute positioning */
+  width: 100%;
+  height: 100%;
+  display: block;
+  border: 0;
+}
