@@ -1,5 +1,5 @@
 {
-  "name": "ey-da-agents-static",
+  "name": "skill-sync-static",
   "version": "1.0.0",
   "main": "server.js",
   "dependencies": {
